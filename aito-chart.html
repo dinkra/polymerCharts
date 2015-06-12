@@ -19,6 +19,12 @@ Polymer({
     is: 'aito-chart',
 
     ready: function() {
+    	this.array = this.getArray();
+    	console.log(this);
+
+    },
+
+    getArray: function() {
     	var myArray = [["Day", "Likes"]];
     	$.getJSON('get-aito.json', function(data){
 			var obj = data.items[0].stats[1].history;
@@ -31,15 +37,9 @@ Polymer({
 				
 
 			}
-			console.log(myArray);
-			this.array = myArray;
 		});
-
-
-    	// this.array = [["Day", "Likes"], [20, 27], [20, 28], [27, 31]];
-
-    	console.log(myArray);
-    },
+		return myArray;
+    }
 
 });
 
