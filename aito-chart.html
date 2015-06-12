@@ -20,44 +20,34 @@ Polymer({
 
     ready: function() {
     	this.array = this.getArray();
-    	this.setMyArray();
+    	
     	//console.log(this);
     	//console.log(this.execRegExp());
 
     },
 
     getArray: function() {
-
+    	var myArray = [["Day", "Likes"]];
     	$.getJSON('get-aito.json', function(data){
-    		return data.items[0].stats[1].history;
-		});
+    		//return data.items[0].stats[1].history;
+    		
+    		var obj = data.items[0].stats[1].history;
+			var re = /..:..:../;
+
+			for (var prop in obj) {
+				var val = obj[prop];
+	  			prop = re.exec(prop);
+				prop = prop[0];
+				console.log(prop);
+				var tempArray = [prop, val];
+				myArray.push(tempArray);
+			}
+		});	
+		console.log(myArray);
+		return myArray;
 		
     },
 
-    execRegExp: function(prop){
-    	var re = /..:..:../;
-  		re = re.exec(prop);
-  		return re[0];
-	},
-
-	setMyArray: function() {
-		var myArray = [["Day", "Likes"]];
-		var obj = this.array;
-		var re = /..:..:../;
-
-		for (var prop in obj) {
-			var val = obj[prop];
-  			prop = re.exec(prop);
-			prop = prop[0];
-			console.log(prop);
-			var tempArray = [prop, val];
-			myArray.push(tempArray);
-		}
-
-		this.array = myArray;
-		console.log(this.array);
-	}
-
-});
+  
 
 </script>
