@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<!-- <link rel="stylesheet" href="style.css"> -->
+
+  	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  	<!-- <script src="xapp.js"></script> -->
+  	<!-- <link rel="import"
+      	  href="http://www.polymer-project.org/1.0/samples/components/polymer/polymer.html">
+ -->
+
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="bower_components/polymer/polymer.html">
+
+    <link rel="import" href="bower_components/google-chart/google-chart.html">
+    
+
+    <link rel="import" href="aito-chart.html">
+
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+	
+</head>
+<body>
+	
+	<aito-chart></aito-chart>
+
+	<google-chart
+		type='area'
+		data='[["Day", "Likes"], [20, 27], [20, 28], [27, 31]]'
+		drawChart()>
+	</google-chart>
+
+</body>
+</html>

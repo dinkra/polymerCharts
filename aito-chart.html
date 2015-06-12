@@ -1,0 +1,46 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+
+<link rel="import" href="bower_components/google-chart/google-chart.html">
+
+<dom-module id="aito-chart">
+	<template>
+		<google-chart type='area' data='{{array}}'>
+		</google-chart>
+		<div>---------------------------------------------------------------</div>
+
+	</template>
+
+</dom-module>
+
+<script>
+
+Polymer({
+
+    is: 'aito-chart',
+
+    ready: function() {
+    	var myArray = [["Day", "Likes"]];
+    	$.getJSON('get-aito.json', function(data){
+			var obj = data.items[0].stats[1].history;
+			console.log(obj);
+    
+			for (var prop in obj) {
+				var val = obj[prop];
+				var tempArray = [20, val];
+				myArray.push(tempArray);
+				
+
+			}
+			console.log(myArray);
+			this.array = myArray;
+		});
+
+
+    	// this.array = [["Day", "Likes"], [20, 27], [20, 28], [27, 31]];
+
+    	console.log(myArray);
+    },
+
+});
+
+</script>
