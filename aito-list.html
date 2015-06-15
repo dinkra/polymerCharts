@@ -1,0 +1,67 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+
+<link rel="import" href="bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="aito-item.html">
+<link rel="import" href="aito-chart.html">
+
+
+<dom-module id="aito-list">
+
+  <template>
+  	<!-- <iron-ajax  auto 
+  				url="get-aito.json" 
+  				on-response="handleResponse"></iron-ajax> -->
+  	<button on-click="onSortClick">sort by published</button>
+	<template is="dom-repeat" items="{{items}}">		
+		<aito-item item="{{item}}" maxVal="{{maxVal}}"></aito-item>
+		<aito-chart item="{{item}}" maxVal="{{maxVal}}"></aito-chart>
+		<h1>{{maxVal}}</h1>
+    </template>
+
+  </template>
+
+</dom-module>
+
+<script>
+
+  Polymer({
+
+    is: 'aito-list',
+
+    properties: {
+    	items: Array,
+    	maxVal: String,
+    	textItem: Array,
+    },
+
+    ready: function() {
+    	this.maxVal = '5sdf';
+
+	},
+
+    onSortClick: function(e) {
+    	this.items = this.sortByPublishedDate();
+    	//console.log(this.items);
+    },
+
+    sortByPublishedDate: function() {
+    	return _.sortBy(this.items, function(array) { return array.published })
+	},
+
+	getMaxLikes: function() {
+		if (this.items) {
+			this.maxVal = _.max(this.items.stats[1].history, function(arr){ return arr[1] });
+	    	console.log(maxVal);
+	    	this.maxVal = '5sdf';
+	    	return this.maxVal;
+    	};
+	},
+
+	getItem: function() {
+		this.textItem = this.items[0];
+		console.log(this.items);
+	}
+
+  });
+
+</script>

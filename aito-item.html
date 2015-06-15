@@ -1,0 +1,39 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+
+<link rel="import" href="bower_components/google-chart/google-chart.html">
+<dom-module id="aito-item">
+
+  <template>
+	<h3>cls: <span>{{item.cls}}</span></h3>
+	<ul>
+        <li>title: <span>{{item.title}}</span></li>
+        <li>id: <span>{{item.id}}</span></li>  
+        <li><img src="{{item.social-image}}" width="300" height="200"></li> 
+		<li>published: <span>{{item.published}}</span></li> 
+		<!-- <li><google-chart type='area' data='{{array}}'></google-chart></li> -->
+	</ul>
+  </template>
+
+</dom-module>
+
+<script>
+
+	Polymer({
+
+		is: 'aito-item',
+
+		properties: {
+			item: Object
+		},
+
+		ready: function() {
+    	// this.getArray();
+    	
+    	//console.log(this);
+    	//console.log(this.execRegExp());
+
+	    },
+
+	});
+
+</script>

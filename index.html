@@ -5,8 +5,9 @@
 	<!-- <link rel="stylesheet" href="style.css"> -->
 
   	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-
   	<script src="underscore-min.js"></script>
+  	<script src="http://cdn.jsdelivr.net/sockjs/1.0.0/sockjs.min.js"></script>
+  	<script src="vert.x-2.1.5/client/vertxbus-2.1.js"></script>
   	<!-- <script src="xapp.js"></script> -->
   	<!-- <link rel="import"
       	  href="http://www.polymer-project.org/1.0/samples/components/polymer/polymer.html">
@@ -14,27 +15,57 @@
 
     <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
     <link rel="import" href="bower_components/polymer/polymer.html">
-
-    <link rel="import" href="bower_components/google-chart/google-chart.html">
     
 
-    <link rel="import" href="aito-chart.html">
+    <link rel="import" href="aito-list.html">
 
 	<meta charset="UTF-8">
 	<title>Document</title>
-
-	
 </head>
 <body>
-	
-	<aito-chart></aito-chart>
 
-	<google-chart
-		type='area'
-		cols='[{"label":"Mth", "type":"string"}, {"label":"Days", "type":"number"}, {"label":"Days", "type":"number"}]'
-		rows='[["Jan", 31, 23],["Feb", 28, 22],["Mar", 31, 34]]'
-		drawChart()>
-	</google-chart>
+	
+
+	<aito-list id="a"></aito-list>
+	
+	<script>
+		// var el = document.querySelector('#a');
+
+		// var bus = new vertx.EventBus('http://54.170.94.30:8888/eventbus');
+  //       bus.onopen = function() {
+  //           bus.send('aito/telegraaf/get-aito', {}, function(aito) {
+  //               //console.log(aito.items);
+  //               //var el = new AitoList(aito.items);
+  //               el.items = aito.items;
+  //           });
+  //       };
+
+		var el = document.querySelector('#a');
+		$.getJSON('get-aito.json', function(data){
+			el.items = data.items;
+			// el.items = _.sortBy(data.items, function(o) { return Date.parse(o.published) })
+		});
+
+	// function sortByPublishedDate(array) {
+	// 	for (var i = (array.length - 1); i >= 0; i--) {
+ //      		for (var j = 1; j <= i; j++) {
+ //      			var a = Date.parse(array[j-1].published);
+ //      			var b = Date.parse(array[j].published);
+ //         		if (a > b) {
+	// 				var temp = array[j-1];
+	// 				array[j-1] = array[j];
+	// 				array[j] = temp;
+ //   				} 
+ //   			} 
+ //   		} 
+
+ //   		return array;
+	
+	// 	for (var i = 0; i < array.length; i++) {
+	// 		console.log(array[i].published);
+	// 	};
+	// }
+	</script>
 
 </body>
 </html>
