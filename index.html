@@ -5,6 +5,8 @@
 	<!-- <link rel="stylesheet" href="style.css"> -->
 
   	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  	<script src="underscore-min.js"></script>
   	<!-- <script src="xapp.js"></script> -->
   	<!-- <link rel="import"
       	  href="http://www.polymer-project.org/1.0/samples/components/polymer/polymer.html">
@@ -29,7 +31,8 @@
 
 	<google-chart
 		type='area'
-		data='[["Month", "Days"], ["Jan", 31], ["Feb", 28], ["Mar", 31]]'
+		cols='[{"label":"Mth", "type":"string"}, {"label":"Days", "type":"number"}, {"label":"Days", "type":"number"}]'
+		rows='[["Jan", 31, 23],["Feb", 28, 22],["Mar", 31, 34]]'
 		drawChart()>
 	</google-chart>
 

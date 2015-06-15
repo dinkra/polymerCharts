@@ -4,9 +4,8 @@
 
 <dom-module id="aito-chart">
 	<template>
-		<google-chart type='area' data='{{array}}'>
+		<google-chart type='area' options='{{options}}' data='{{array}}' data='{{data}}'>
 		</google-chart>
-		<div>---------------------------------------------------------------</div>
 
 	</template>
 
@@ -18,16 +17,30 @@ Polymer({
 
     is: 'aito-chart',
 
+    properties: {
+    	options: Object,
+    },
+
     ready: function() {
-    	this.array = this.getArray();
-    	
+    	this.getArray();
+    	this.options = {
+		  title: "Chart title goes here",
+		  hAxis: {title: "Categories", minValue: 0},
+		  vAxis: {title: "Values", minValue: 0, maxValue: 100},
+		  legend: "none"
+		};
+
+		var data = [["Day", "Likes"], ["Jan", 31], ["Feb", 28], ["Mar", 31]];
     	//console.log(this);
     	//console.log(this.execRegExp());
 
     },
 
     getArray: function() {
-    	var myArray = [["Day", "Likes"]];
+    	//var myArray = [["Day", "Likes"]];
+    	var myArray = [];
+    	var that = this;
+
     	$.getJSON('get-aito.json', function(data){
     		//return data.items[0].stats[1].history;
     		
@@ -36,18 +49,35 @@ Polymer({
 
 			for (var prop in obj) {
 				var val = obj[prop];
-	  			prop = re.exec(prop);
-				prop = prop[0];
-				console.log(prop);
-				var tempArray = [prop, val];
+	  			var p = re.exec(prop);
+				p = p[0];
+				//p = Date.parse(p);
+				//console.log(p);
+				var tempArray = [p, val];
 				myArray.push(tempArray);
+
+				// console.log(this);
 			}
+
+			myArray = _.sortBy(myArray, function(arr) { return arr[0] });
+			var maxVal = _.max(myArray, function(arr){ return arr[1]; });
+    		console.log(maxVal);
+
+			console.log(myArray);
+			myArray.unshift(["Day", "Likes"]);
+			console.log(myArray);
+			that.array = myArray;
 		});	
-		console.log(myArray);
-		return myArray;
+
 		
     },
 
-  
+    // sortByPublishedDate: function() {
+    // 	return _.sortBy(this.items, function(array) { return array.published })
+    // }
+
+    // {"title": "Distribution of days in 2001Q1", "hAxis": {"title": "Time"}, "vAxis": {"title": "Likes"}}
+
+});  
 
 </script>
